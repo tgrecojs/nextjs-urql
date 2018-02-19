@@ -21,6 +21,7 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <title>With Emotion</title>
+          <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet" />
           <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
         </Head>
         <body>
