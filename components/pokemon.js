@@ -2,12 +2,11 @@ import React from "react";
 import { Connect, query } from "urql";
 
 const QueryString = `
-  query Pokemon($id: String) {
+  query ($id: String) {
     pokemon(id: $id) {
       id
       name
       image
-      evolutions { id }
       height {
         minimum
         maximum
@@ -16,28 +15,32 @@ const QueryString = `
   }
 `;
 
-const flexCol = {
-    display: 'flex',
-    flexDirection: 'column'
-}
-const Pokemon = ({ id, onClose }) => (
+const Pokemon = ({ id }) => (
     <Connect
-      query={query(QueryString, { id: id })}
+      query={query(QueryString, { id })}
+      cache={true}
       children={({ loaded, data }) => {
         return (
           <div style={{ 
-            display: 'flex',
+          display: 'flex',
           flexDirection: 'column',
-          width: '500px'}}>
+          width: '500px'
+        }}>
             {loaded === false ? (
               <p>Loading</p>
             ) : (
-              <div>
-                <h2>{data.pokemon.name}</h2>
+              <div style={{
+              background: 'white',
+              padding: '1em',
+              marginTop: '24px',
+              height: '500px',
+              border: '2px solid black',
+              borderRadius: '10px'
+            }}>
+                <h2>Name: {data.pokemon.name}</h2>
                 <h4>Max height: {data.pokemon.height.maximum}</h4>
                 <h4>Min height: {data.pokemon.height.minimum}</h4>
                 <img src={data.pokemon.image} />
-                <button onClick={onClose}>Close</button>
               </div>
             )}
           </div>

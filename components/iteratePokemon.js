@@ -1,63 +1,52 @@
 import React from "react";
 import { Connect, query } from "urql";
-import { Combined , PokemonWrapper} from '../shared/styles'
-import Pokemon from "./pokemon";
+import { Combined as PDiv } from '../shared/styles'
+import Pokemon from './pokemon';
 
 const PokemonQuery = query(`
-{
-    pokemons(first: 10) {
-        id 
-        name
-      }
+  query ($first: Int!){
+      pokemons(first: $first) {
+          id
+          name
+        }
   }
-`);
+`, { first: 5 });
 
 
 export default class IteratePokemon extends React.Component {
-  state = {
-    selected: 'UG9rZW1vbjowMDE='
-  };
+  state = { selected: 'UG9rZW1vbjowMDE='};
   setSelected = id => {
     this.setState({
       selected: id
     });
   };
-  unsetSelected = () => {
-    this.setState({
-      selected: null
-    });
-  };
+
   render() {
-      console.log(this.state)
     return (
       <div style={{
-    display: 'flex', 
-      justifyContent: 
-      'space-around'}}>
+      display: 'flex', 
+      justifyContent: 'space-around'
+    }}>
         <Connect
           query={PokemonQuery}
-          children={({ loaded, data }) => {
-              console.log(data)
-            return loaded === false ? (
+          children={({ loaded, data }) => loaded === false ? (
               "loading"
             ) : (
               <div>
                   {data.pokemons.map(d => (
-                      <Combined
+                      <PDiv
                       key={d.id}
                         type="button"
                         onClick={this.setSelected.bind(null, d.id)}
                       >
-                        <h2>Name: {d.name}</h2>
-                    </Combined>
+                        <h2>{d.name}</h2>
+                    </PDiv>
                   ))}
               </div>
-            );
-          }}
+            )
+          }
         />
-        {this.state.selected && (
-          <Pokemon id={this.state.selected} onClose={this.unsetSelected} />
-        )}
+          <Pokemon id={this.state.selected} />
       </div>
     );
   }
