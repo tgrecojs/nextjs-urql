@@ -1,6 +1,6 @@
 import React from "react";
 import { Connect, query } from "urql";
-import { StyledButton } from '../shared/styles'
+import { StyledButton, flexLayout } from '../shared/styles'
 import Pokemon from './pokemon';
 
 const PokemonQuery = query(`
@@ -23,14 +23,11 @@ export default class IteratePokemon extends React.Component {
   };
   render() {
     return (
-      <div style={{
-      display: 'flex', 
-      justifyContent: 'space-around'
-    }}>
+      <div style={flexLayout}>
         <Connect
           query={PokemonQuery}
           children={({ loaded, data }) => loaded === false ? (
-              "loading"
+              <p>"loading"</p>
             ) : (
               <div>
                   {data.pokemons.map(d => (

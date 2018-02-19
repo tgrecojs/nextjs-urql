@@ -77,6 +77,10 @@ ${hoverStyles};
   background-color: linen;
 }
 `
+export const flexLayout = {
+ display: 'flex',
+ justifyContent: 'space-around'
+}
 export const Animated = styled('div')`
 ${basicStyles};
 ${hoverStyles};
