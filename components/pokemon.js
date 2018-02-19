@@ -1,5 +1,5 @@
-import React from "react";
 import { Connect, query } from "urql";
+import { pokemonDetails, flexCol} from '../shared/styles';
 
 const QueryString = `
   query ($id: String) {
@@ -15,37 +15,25 @@ const QueryString = `
   }
 `;
 
+const createQuery = id => query(QueryString, { id })
+
+
 const Pokemon = ({ id }) => (
     <Connect
-      query={query(QueryString, { id })}
-      cache={true}
-      children={({ loaded, data }) => {
-        return (
-          <div style={{ 
-          display: 'flex',
-          flexDirection: 'column',
-          width: '500px'
-        }}>
-            {loaded === false ? (
-              <p>Loading</p>
-            ) : (
-              <div style={{
-              background: 'white',
-              padding: '1em',
-              marginTop: '24px',
-              height: '500px',
-              border: '2px solid black',
-              borderRadius: '10px'
-            }}>
+      query={createQuery(id)}
+      children={({ loaded, data }) =>
+          <div style={flexCol}>
+            {loaded === false ? 
+              <p>loading..</p> : 
+              <div style={pokemonDetails}>
                 <h2>Name: {data.pokemon.name}</h2>
                 <h4>Max height: {data.pokemon.height.maximum}</h4>
                 <h4>Min height: {data.pokemon.height.minimum}</h4>
                 <img src={data.pokemon.image} />
               </div>
-            )}
+            }
           </div>
-        );
-      }}
+      }
     />
 );
 

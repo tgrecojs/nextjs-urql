@@ -11,6 +11,7 @@ html, body {
 `
 
 export const basicStyles = css`
+font-family: 'Architects Daughter', cursive;
 background-color: white;
 color: cornflowerblue;
 border: 1px solid lightgreen;
@@ -46,7 +47,29 @@ justifyContent: space-around;
 export const Basic = styled('div')`
 ${basicStyles};
 `
+export const flexCol = {
+  display: 'flex',
+  flexDirection: 'column',
+  width: '500px'
+}
 
+export const pokemonDetails = {
+  background: 'white',
+  padding: '1em',
+  marginTop: '24px',
+  height: '500px',
+  width: '400px',
+  border: '2px solid black',
+  borderRadius: '10px'
+}
+export const StyledButton = styled('button')`
+${basicStyles};
+${hoverStyles};
+width: 100px;
+& code {
+  background-color: linen;
+}
+`
 export const Combined = styled('div')`
 ${basicStyles};
 ${hoverStyles};

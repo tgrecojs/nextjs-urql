@@ -1,26 +1,26 @@
 import React from "react";
 import { Connect, query } from "urql";
-import { Combined as PDiv } from '../shared/styles'
+import { StyledButton } from '../shared/styles'
 import Pokemon from './pokemon';
 
 const PokemonQuery = query(`
-  query ($first: Int!){
+  query ($first: Int!) {
       pokemons(first: $first) {
           id
           name
         }
   }
-`, { first: 5 });
+`, { first: 10 });
 
 
 export default class IteratePokemon extends React.Component {
   state = { selected: 'UG9rZW1vbjowMDE='};
-  setSelected = id => {
+  
+  selectPokemon = id => {
     this.setState({
       selected: id
     });
   };
-
   render() {
     return (
       <div style={{
@@ -34,13 +34,12 @@ export default class IteratePokemon extends React.Component {
             ) : (
               <div>
                   {data.pokemons.map(d => (
-                      <PDiv
+                      <StyledButton
                       key={d.id}
-                        type="button"
-                        onClick={this.setSelected.bind(null, d.id)}
+                        onClick={this.selectPokemon.bind(null, d.id)}
                       >
                         <h2>{d.name}</h2>
-                    </PDiv>
+                    </StyledButton>
                   ))}
               </div>
             )
