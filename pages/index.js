@@ -4,10 +4,7 @@ import withStyles from '../shared/withStyles.component';
 
 const client = new Client({ url: 'https://graphql-pokemon.now.sh'})
 
-const App = () => 
-  <Provider client={client}>
-    <IteratePokemon />
-  </Provider>
+const App = () => <IteratePokemon />
 
 
 export default withStyles(App)

@@ -20,7 +20,7 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <title>With Emotion</title>
+          <title>GraphQl with Urql</title>
           <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet" />
           <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
         </Head>
