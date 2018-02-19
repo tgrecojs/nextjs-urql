@@ -3,10 +3,10 @@ import styled, { keyframes, css, injectGlobal } from 'react-emotion'
 export const injectGlobalStyles = () => injectGlobal`
 html, body {
   margin: 0;
-  background: papayawhip;
+  background: #551A8B;
   min-height: 100%;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 24px;
+  font-family: 'Architects Daughter', cursive;
+  font-size: 16px;
 }
 `
 
@@ -19,7 +19,7 @@ border-bottom: none;
 box-shadow: 5px 5px 0 0 lightgreen, 10px 10px 0 0 lightyellow;
 transition: all 0.1s linear;
 padding: 16px 8px;
-margin: 10px;
+margin: 24px;
 `
 
 export const hoverStyles = css`
